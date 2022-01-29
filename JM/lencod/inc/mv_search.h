@@ -101,7 +101,14 @@ static inline distblk mv_cost(const VideoParameters *p_Vid, int lambda, const Mo
 {
 #if JCOST_CALC_SCALEUP
   int *mvbits = p_Vid->mvbits;
-  return ( ((distblk)lambda) *((distblk)(mvbits[mv->mv_x - pmv->mv_x] + mvbits[mv->mv_y - pmv->mv_y])) );
+  int mvdx = mv->mv_x - pmv->mv_x;
+  int mvdy = mv->mv_y - pmv->mv_y;
+  if (abs(mvdx) >= p_Vid->max_mvd || abs(mvdy) >= p_Vid->max_mvd)
+  {
+      return MAXINT;
+  }
+
+  return ( ((distblk)lambda) *((distblk)(mvbits[mvdx] + mvbits[mvdy])) );
 #else
 #if (USE_RND_COST)
   return (rshift_rnd_sf((lambda *(p_Vid->mvbits[mv->mv_x - pmv->mv_x] + p_Vid->mvbits[mv->mv_y - pmv->mv_y])), LAMBDA_ACCURACY_BITS));

@@ -12,6 +12,7 @@
 *.patch
 *.o
 *.a
+*.bak
 tags
 
 # User-specific files (MonoDevelop/Xamarin Studio)
