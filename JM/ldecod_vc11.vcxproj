@@ -262,7 +262,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="bin\decoder.cfg" />
+    <None Include="decoder.cfg" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lcommon\inc\blk_prediction.h" />
